@@ -1,0 +1,10 @@
+/* Global */
+body {
+  background-color: #e0e0e0;
+  font-family: sans-serif;
+  font-size: 2rem;
+}
+
+h1 {
+  color: var(--primary);
+}

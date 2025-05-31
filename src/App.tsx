@@ -1,35 +1,24 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+//Geralmente o primeiro componente é um App.tsx
+//criar uma função com PascalCase
 
-function App() {
-  const [count, setCount] = useState(0);
+import './styles/theme.css';
+import './styles/global.css';
+
+import { Fragment } from 'react/jsx-runtime';
+import { Heading } from './components/Heading';
+
+export function App() {
+  console.log('Oi');
 
   return (
-    <>
-      <div>
-        <a href='https://vite.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount(count => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    // o React Fragment me permite adicionar vários elementos irmãos, pois sem ele seriam todos "pais",
+    //pode ser com ou sem o nome Fragment
+    <Fragment>
+      <Heading />
+      <p>Vai funcionar com um HTML normal, mas com o poder bombadão do JS.</p>
+    </Fragment>
   );
 }
 
-export default App;
+// export { App };
+// export default App; //permite chamar de qualquer nome no import
