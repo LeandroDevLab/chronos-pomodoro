@@ -1,6 +1,3 @@
-//Geralmente o primeiro componente é um App.tsx
-//criar uma função com PascalCase
-
 import './styles/theme.css';
 import './styles/global.css';
 
@@ -14,7 +11,9 @@ export function App() {
     // o React Fragment me permite adicionar vários elementos irmãos, pois sem ele seriam todos "pais",
     //pode ser com ou sem o nome Fragment
     <Fragment>
-      <Heading />
+      <Heading attr={1234} attr2='Nossa nossa meu Deus!'>
+        Olá Leandro
+      </Heading>
       <p>Vai funcionar com um HTML normal, mas com o poder bombadão do JS.</p>
     </Fragment>
   );

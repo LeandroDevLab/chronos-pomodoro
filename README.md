@@ -1,11 +1,41 @@
-# React + TypeScript + Vite
+# Projeto React + TypeScript + Vite
+
+## Criando o primeiro projeto
+
+`npm create vite@latest`
+
+### Geralmente o primeiro componente é um App.tsx
+
+- criar uma função com PascalCase
+
+### Criar CSS Modules com escopo de componente
+
+#### Usando escopo para não colidir
+
+```tsx "Heading.tsx"
+import styles from './Heading.module.css';
+// ...
+<h1 className={styles.heading}>Olá Mundo!</h1>;
+<h1 className={`${styles.cyan} ${styles.heading}`}>Olá Mundo novamente!</h1>;
+```
+
+#### Alteração do nome na renderização do HTML final
+
+```html "Elements"
+<h1 class="_heading_1sluc_1">Olá Mundo!</h1>
+<h1 class="_cyan_1sluc_5 _heading_1sluc_1">Olá Mundo novamente!</h1>
+```
+
+# Informações Padrão do React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses
+  [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses
+  [SWC](https://swc.rs/) for Fast Refresh
 
 ## Expanding the ESLint configuration
 
@@ -28,15 +58,18 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
-})
+});
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+You can also install
+[eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and
+[eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for
+React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
 export default tseslint.config({
   plugins: {
@@ -50,5 +83,5 @@ export default tseslint.config({
     ...reactX.configs['recommended-typescript'].rules,
     ...reactDom.configs.recommended.rules,
   },
-})
+});
 ```
