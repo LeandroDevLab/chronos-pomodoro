@@ -1,3 +1,5 @@
+import { TimerIcon } from 'lucide-react';
+
 import './styles/theme.css';
 import './styles/global.css';
 
@@ -11,8 +13,11 @@ export function App() {
     // o React Fragment me permite adicionar vários elementos irmãos, pois sem ele seriam todos "pais",
     //pode ser com ou sem o nome Fragment
     <Fragment>
-      <Heading attr={1234} attr2='Nossa nossa meu Deus!'>
+      <Heading>
         Olá Leandro
+        <button>
+          <TimerIcon />
+        </button>
       </Heading>
       <p>Vai funcionar com um HTML normal, mas com o poder bombadão do JS.</p>
     </Fragment>
