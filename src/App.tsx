@@ -1,9 +1,8 @@
-import { TimerIcon } from 'lucide-react';
+import { TimerIcon, Dumbbell } from 'lucide-react';
 
 import './styles/theme.css';
 import './styles/global.css';
 
-import { Fragment } from 'react/jsx-runtime';
 import { Heading } from './components/Heading';
 
 export function App() {
@@ -12,15 +11,39 @@ export function App() {
   return (
     // o React Fragment me permite adicionar vários elementos irmãos, pois sem ele seriam todos "pais",
     //pode ser com ou sem o nome Fragment
-    <Fragment>
+    <>
+      <div className='container'>
+        <div className='content'>
+          <section>LOGO</section>
+        </div>
+      </div>
+
+      <div className='container'>
+        <div className='content'>
+          <section>MENU</section>
+        </div>
+      </div>
+
+      <div className='container'>
+        <div className='content'>
+          <section>FORM</section>
+        </div>
+      </div>
+
+      <div className='container'>
+        <div className='content'>
+          <section>FOOTER</section>
+        </div>
+      </div>
+
       <Heading>
         Olá Leandro
         <button>
           <TimerIcon />
+          <Dumbbell />
         </button>
       </Heading>
-      <p>Vai funcionar com um HTML normal, mas com o poder bombadão do JS.</p>
-    </Fragment>
+    </>
   );
 }
 
