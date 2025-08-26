@@ -1,6 +1,6 @@
 .countdown {
   text-align: center;
-  font-size: clamp(8rem, 30vw, 16rem);
+  font-size: clamp(8rem, 30vw, 16rem); /* CLAMP, mínimo, ajustável e máximo */
   font-weight: bold;
   padding-top: 1.3rem;
 }
