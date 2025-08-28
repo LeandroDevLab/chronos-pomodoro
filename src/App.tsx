@@ -10,14 +10,31 @@ import { Cycles } from './components/Cycles';
 import { DefaultButton } from './components/DefaultButton';
 import { PlayCircleIcon } from 'lucide-react';
 import { Footer } from './components/Footer';
+import { Heading } from './components/Heading';
+import { useState } from 'react';
 
 export function App() {
-  console.log('Oi');
+  const [numero, setNumero] = useState(0);
+
+  function handleClick() {
+    //Entendendo a diferença de useState com prevState e sem
+    setNumero(prevState => prevState + 1);
+    setNumero(prevState => prevState + 1);
+    setNumero(prevState => prevState + 1); // retorna 3
+    //setNumero(numero + 1);
+    //setNumero(numero + 1);
+    //setNumero(numero + 1); // retorna 1
+  }
 
   return (
     // o React Fragment me permite adicionar vários elementos irmãos, pois sem ele seriam todos "pais",
     //pode ser com ou sem o nome Fragment
     <>
+      <Container>
+        <Heading>Número: {`${numero}`}</Heading>
+        <DefaultButton icon='Aumentar' onClick={handleClick} />
+      </Container>
+
       <Container>
         <Logo>Chronos</Logo>
       </Container>
@@ -36,7 +53,7 @@ export function App() {
             <DefaultInput
               id='meuInput'
               type='text'
-              labelText='task'
+              labelText={numero.toString()} // converter para string
               title='TITULO'
               placeholder='Digite tarefa'
             />
