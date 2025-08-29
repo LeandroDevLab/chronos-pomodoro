@@ -1,13 +1,28 @@
-import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from 'lucide-react';
+import {
+  HistoryIcon,
+  HouseIcon,
+  MoonIcon,
+  SettingsIcon,
+  SunIcon,
+} from 'lucide-react';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 
 type AvailableThemes = 'dark' | 'light';
 
 export function Menu() {
-  const [theme, setTheme] = useState<AvailableThemes>('dark');
+  const [theme, setTheme] = useState<AvailableThemes>(() => {
+    // as AvailableThemes -> forçando um valor de AvailableThemes (dark ou light) || 'dark' por padrão
+    const storageTheme =
+      (localStorage.getItem('theme') as AvailableThemes) || 'dark';
+    return storageTheme;
+  });
 
-  // evento capturado no onClick
+  const nextThemeIcon = {
+    dark: <SunIcon />,
+    light: <MoonIcon />,
+  };
+
   function handleThemeChange(
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) {
@@ -17,25 +32,12 @@ export function Menu() {
       const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
       return nextTheme;
     });
-
-    //document.documentElement.setAttribute('data-theme', theme); // efeito colateral, manipulando como um JS normal e não como o React
   }
 
-  // // FORMA 1
-  // useEffect(() => {
-  //   console.log('useEffect sem dependência', Date.now());
-  // }); // é executado toda vez que o componente renderiza na tela, por qualquer motivo!
-
-  // // FORMA 2 com array de dependência vazia
-  // useEffect(() => {
-  //   console.log('useEffect com array deps vazio', Date.now());
-  // }, []); // Executa apenas quando o React monta o componente na tela pela primeira vez
-  // // Buscar dados de uma API externa e puxa assim que carrega e bastaria buscar uma vez ou para renderização
-
-  // FORMA 3 com dependência citada
   useEffect(() => {
     console.log('Theme mudou', theme, Date.now());
     document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
 
     return () => {
       console.log(
@@ -77,7 +79,8 @@ export function Menu() {
         title='Mudar o tema'
         onClick={handleThemeChange}
       >
-        <SunIcon />
+        {nextThemeIcon[theme]}
+        {/* {theme === 'dark' ? <SunIcon /> : <MoonIcon /> // gostei desse jeito} */}
       </a>
     </nav>
   );
