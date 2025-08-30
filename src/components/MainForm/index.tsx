@@ -4,15 +4,22 @@ import { PlayCircleIcon } from 'lucide-react';
 import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
+import { useState } from 'react';
 
 export function MainForm() {
-  // Tudo que faço no navegador tem um evento, tentar pegar esse evento no
-  // colocando a função em arrow fuction dentro do tsx para ver qual o nome
-  // do evento
+  const [taskName, setTaskName] = useState('');
+
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('Deu Certo!');
+    console.log('Deu Certo!', taskName);
   }
+
+  /* function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.target;
+    console.log(e)
+    }) 
+  }*/
+
   return (
     <>
       <form onSubmit={handleCreateNewTask} className={styles.form} action='#'>
@@ -23,6 +30,11 @@ export function MainForm() {
             labelText='task'
             title='TITULO'
             placeholder='Digite tarefa'
+            value={taskName}
+            onChange={e => {
+              //console.log(e.target.value); // o target é o próprio input
+              setTaskName(e.target.value); // vai setar todo o conteúdo digitado para o taskName
+            }}
           />
         </div>
 
