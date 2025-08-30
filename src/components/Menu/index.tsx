@@ -35,14 +35,14 @@ export function Menu() {
   }
 
   useEffect(() => {
-    console.log('Theme mudou', theme, Date.now());
+    //console.log('Theme mudou', theme, Date.now());
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
 
     return () => {
-      console.log(
+      /* console.log(
         'Será executado 1º, antes de todas as mudanças envolvendo esse useEffect',
-      );
+      ); */
     };
   }, [theme]);
 

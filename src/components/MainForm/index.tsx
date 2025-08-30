@@ -4,25 +4,18 @@ import { PlayCircleIcon } from 'lucide-react';
 import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
-import { useTaskContext } from '../../contexts/TaskContext';
 
 export function MainForm() {
-  const { setState } = useTaskContext();
-
-  function handleClick() {
-    setState(prevState => {
-      return {
-        ...prevState,
-        formattedSecondsRemaining: '21:00',
-      };
-    });
+  // Tudo que faço no navegador tem um evento, tentar pegar esse evento no
+  // colocando a função em arrow fuction dentro do tsx para ver qual o nome
+  // do evento
+  function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log('Deu Certo!');
   }
   return (
     <>
-      <form className={styles.form} action='#'>
-        <button onClick={handleClick} type='button'>
-          Clicar
-        </button>
+      <form onSubmit={handleCreateNewTask} className={styles.form} action='#'>
         <div className={styles.formRow}>
           <DefaultInput
             id='meuInput'
