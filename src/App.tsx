@@ -2,28 +2,12 @@ import './styles/theme.css';
 import './styles/global.css';
 
 import { Home } from './pages/Home';
-import { useState } from 'react';
-import { TaskContext } from './contexts/TaskContext';
-
-const initialState: TaskStateModel = {
-  tasks: [],
-  secondsRemaing: 0,
-  formattedSecondsRemaining: '00:00',
-  activeTask: null,
-  currentCycle: 0,
-  config: {
-    workTime: 25,
-    shortBreakTime: 5,
-    longBreakTime: 15,
-  },
-};
+import { TaskContextProvider } from './contexts/TaskContext';
 
 export function App() {
-  const [state, setState] = useState(initialState);
-  // o Provider é quem vai prover as informações de value para o componente e seus filhos!
   return (
-    <TaskContext.Provider value={{ esseQueVaiValer: 321 }}>
+    <TaskContextProvider>
       <Home />
-    </TaskContext.Provider>
+    </TaskContextProvider>
   );
 }
