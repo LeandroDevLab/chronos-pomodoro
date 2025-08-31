@@ -76,12 +76,14 @@ export function MainForm() {
         </div>
 
         <div className={styles.formRow}>
-          <p>Próximo intervalo é de:</p>
+          <p>Próximo intervalo é de: </p>
         </div>
 
-        <div className={styles.formRow}>
-          <Cycles />
-        </div>
+        {state.currentCycle > 0 && (
+          <div className={styles.formRow}>
+            <Cycles />
+          </div>
+        )}
 
         <div className={styles.formRow}>
           <DefaultButton icon={<PlayCircleIcon />} color='green' />
