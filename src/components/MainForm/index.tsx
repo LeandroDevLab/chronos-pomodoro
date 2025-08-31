@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import type { TaskModel } from '../../models/TaskModel';
 import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
 
 export function MainForm() {
   const { state, setState } = useTaskContext();
@@ -15,8 +16,12 @@ export function MainForm() {
 
   //CICLOS
   const nextCycle = getNextCycle(state.currentCycle);
-  console.log(nextCycle); // já deixa engatilhado o nextCycle pela função do getNextCycle, que já foi chamado antes de 'submeter'
+  //console.log(nextCycle); // já deixa engatilhado o nextCycle pela função do getNextCycle, que já foi chamado antes de 'submeter'
 
+  //Tipo do ciclo
+  const nextCycleType = getNextCycleType(nextCycle);
+
+  //Submit
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -36,7 +41,7 @@ export function MainForm() {
       completeDate: null,
       interruptDate: null,
       duration: 1,
-      type: 'workTime',
+      type: nextCycleType,
     };
 
     //duration em segundos
