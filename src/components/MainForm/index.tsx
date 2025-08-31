@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-import { PlayCircleIcon } from 'lucide-react';
+import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
@@ -54,9 +54,24 @@ export function MainForm() {
         config: { ...prevState.config }, //só para garantir que estou passando tudo de TaskStateModel
         activeTask: newTask,
         currentCycle: nextCycle,
-        secondsRemaining, //conferir
+        secondsRemaining,
         formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), //fazer em função a parte
         tasks: [...prevState.tasks, newTask], // espalhando o array anterior e adicionando a newTask
+      };
+    });
+  }
+
+  function handleInterruptTask(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) {
+    e.preventDefault(); // uma forma de prevenir que o botão não submeta, mesmo que o React tente
+
+    setState(prevState => {
+      return {
+        ...prevState,
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: '00:00', //fazer em função a parte
       };
     });
   }
@@ -72,6 +87,7 @@ export function MainForm() {
             title='TITULO'
             placeholder='Digite tarefa'
             ref={taskNameInput}
+            disabled={!!state.activeTask}
           />
         </div>
 
@@ -86,7 +102,32 @@ export function MainForm() {
         )}
 
         <div className={styles.formRow}>
-          <DefaultButton icon={<PlayCircleIcon />} color='green' />
+          {/* 
+          Outra forma de evitar submeter mesmo com type='button'
+          -> usar duas condições separadas 
+          !state.activeTask && ... e !!state.activeTask && ...*/}
+          {!state.activeTask && (
+            <DefaultButton
+              aria-label='Iniciar nova tarefa'
+              title='Iniciar nova tareta'
+              type='submit'
+              icon={<PlayCircleIcon />}
+              color='green'
+              key='button_submit_task' // ou usar key='React entender que são diferentes'
+            />
+          )}
+
+          {!!state.activeTask && (
+            <DefaultButton
+              aria-label='Iniciar nova tarefa'
+              title='Iniciar nova tareta'
+              type='button'
+              icon={<StopCircleIcon />}
+              color='red'
+              key='button_button_task' // ou usar key='React entender que são diferentes'
+              onClick={handleInterruptTask}
+            />
+          )}
         </div>
       </form>
     </>
