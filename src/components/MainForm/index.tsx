@@ -9,6 +9,7 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import type { TaskModel } from '../../models/TaskModel';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 export function MainForm() {
   const { state, setState } = useTaskContext();
@@ -54,7 +55,7 @@ export function MainForm() {
         activeTask: newTask,
         currentCycle: nextCycle,
         secondsRemaining, //conferir
-        formattedSecondsRemaining: '00:00', //fazer em função a parte
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), //fazer em função a parte
         tasks: [...prevState.tasks, newTask], // espalhando o array anterior e adicionando a newTask
       };
     });
@@ -75,7 +76,7 @@ export function MainForm() {
         </div>
 
         <div className={styles.formRow}>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <p>Próximo intervalo é de:</p>
         </div>
 
         <div className={styles.formRow}>
