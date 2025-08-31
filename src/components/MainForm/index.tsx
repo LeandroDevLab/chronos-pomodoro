@@ -7,10 +7,15 @@ import { DefaultInput } from '../DefaultInput';
 import { useRef } from 'react';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import type { TaskModel } from '../../models/TaskModel';
+import { getNextCycle } from '../../utils/getNextCycle';
 
 export function MainForm() {
-  const { setState } = useTaskContext();
+  const { state, setState } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
+
+  //CICLOS
+  const nextCycle = getNextCycle(state.currentCycle);
+  console.log(nextCycle); // já deixa engatilhado o nextCycle pela função do getNextCycle, que já foi chamado antes de 'submeter'
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,7 +47,7 @@ export function MainForm() {
         ...prevState,
         config: { ...prevState.config }, //só para garantir que estou passando tudo de TaskStateModel
         activeTask: newTask,
-        currentCycle: 1, //conferir depois
+        currentCycle: nextCycle,
         secondsRemaining, //conferir
         formattedSecondsRemaining: '00:00', //fazer em função a parte
         tasks: [...prevState.tasks, newTask], // espalhando o array anterior e adicionando a newTask
